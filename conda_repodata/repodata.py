@@ -71,7 +71,7 @@ def conda_repodata_patches():
 
 
 @hookimpl
-def conda_subcommand():
+def conda_subcommands():
     """Register repodata subcommand."""
     yield CondaSubcommand(
         name="repodata",
