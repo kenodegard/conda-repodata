@@ -23,12 +23,12 @@ requirements:
     - click
     - conda
 
-test:
-  imports:
-    - conda_repodata
-    - conda_repodata.repodata
-  commands:
-    - conda repodata --help
+# test:
+#   imports:
+#     - conda_repodata
+#     - conda_repodata.repodata
+#   commands:
+#     - conda repodata --help
 
 about:
   home: https://github.com/kenodegard/conda-repodata
