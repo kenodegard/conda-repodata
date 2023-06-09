@@ -1,0 +1,37 @@
+package:
+  name: conda-repodata
+  version: {{ GIT_DESCRIBE_TAG }}+{{ GIT_BUILD_STR }}
+
+source:
+  # git_url only captures committed code
+  git_url: ../
+
+build:
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv && {{ PYTHON }} -m conda init --install
+
+requirements:
+  build:
+    - git  # for source/git_url above
+  host:
+    - python
+    - pip
+    - hatchling >=1.12.2
+    - hatch-vcs >=0.2.0
+    - wheel
+  run:
+    - rich
+    - click
+    - conda
+
+test:
+  imports:
+    - conda_repodata
+    - conda_repodata.repodata
+  commands:
+    - conda repodata --help
+
+about:
+  home: https://github.com/kenodegard/conda-repodata
+  license: BSD-3-Clause
+  license_file: LICENSE
+  summary: Conda plugin to locally manipulate or inspect the repodata.json.

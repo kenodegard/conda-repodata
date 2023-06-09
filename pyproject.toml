@@ -1,0 +1,56 @@
+[build-system]
+requires = [
+  "hatchling >=1.12.2",
+  "hatch-vcs >=0.2.0",
+]
+build-backend = "hatchling.build"
+
+[project]
+name = "conda-repodata"
+description = "Conda plugin to locally manipulate or inspect the repodata.json."
+readme = "README.md"
+authors = [{name = "Ken Odegard", email = "ken.odegard@gmail.com"}]
+license = {file = "LICENSE"}
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "License :: OSI Approved :: BSD License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy"
+]
+requires-python = ">=3.8"
+dependencies = [
+  "rich", "click", "conda"
+]
+dynamic = ["version"]
+
+[project.urls]
+repository = "https://github.com/kenodegard/conda-repodata"
+
+[project.entry-points.conda]
+conda-repodata = "conda_repodata.repodata"
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.version.raw-options]
+local_scheme = "dirty-tag"
+
+[tool.hatch.build]
+include = ["conda_repodata"]
+
+[tool.hatch.build.hooks.vcs]
+version-file = "conda_repodata/__version__.py"
+
+[tool.black]
+target-version = ['py38', 'py39', 'py310', 'py311']
+
+[tool.isort]
+profile = "black"
