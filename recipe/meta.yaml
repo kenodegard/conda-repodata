@@ -13,13 +13,13 @@ requirements:
   build:
     - git  # for source/git_url above
   host:
-    - python >=3.8
+    - python
     - pip
     - hatchling >=1.12.2
     - hatch-vcs >=0.2.0
     - wheel
   run:
-    - python >=3.8
+    - python
     - rich
     - click
     - conda
