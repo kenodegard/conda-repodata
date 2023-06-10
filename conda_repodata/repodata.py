@@ -26,10 +26,16 @@ from rich import print
 from rich.pretty import Pretty
 from rich.table import Table
 
+from .__version__ import __version__
+
+SUBCOMMAND = "repodata"
+PROG_NAME = f"conda {SUBCOMMAND}"
 REPODATA_KEYS = {"info", "packages", "packages.conda", "removed", "repodata_version"}
 
 
 @click.command()
+@click.version_option(__version__)
+@click.help_option("--help", "-h")
 @click.option("--channels", "--channel", "-c", multiple=True)
 @click.option("--subdirs", "--subdir", multiple=True)
 @click.option(
@@ -179,7 +185,7 @@ def conda_repodata_patches():
 def conda_subcommands():
     """Register repodata subcommand."""
     yield CondaSubcommand(
-        name="repodata",
-        action=cli,
+        name=SUBCOMMAND,
+        action=lambda argv: cli(argv, prog_name=PROG_NAME),
         summary=cli.__doc__,
     )
