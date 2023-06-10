@@ -38,7 +38,15 @@ REPODATA_KEYS = {"info", "packages", "packages.conda", "removed", "repodata_vers
     default=False,
     help="Show the stats between the original and patched repodata.",
 )
-def cli(channels: Iterable[str], subdirs: Iterable[str], stats: bool):
+@click.option("--output", help="Save repodata.json to provided path.", type=Path)
+@click.option("--force", is_flag=True, default=False, help="Overwrite existing file.")
+def cli(
+    channels: Iterable[str],
+    subdirs: Iterable[str],
+    stats: bool,
+    output: Path,
+    force: bool,
+):
     """Manipulate or inspect the repodata.json locally."""
     context.__init__(
         argparse_args={"channels": channels or NULL, "subdirs": subdirs or NULL}
@@ -79,7 +87,21 @@ def cli(channels: Iterable[str], subdirs: Iterable[str], stats: bool):
                 )
 
             print(table)
-    elif len(repodatas) != 1:
+    elif output:
+        if output.is_file() and not force:
+            raise CondaError(f"Output file already exists ({output}).")
+        elif output.is_dir() or len(repodatas) > 1:
+            for channel, _, patched in repodatas:
+                path = output / channel.name / channel.subdir / REPODATA_FN
+                path.parent.mkdir(parents=True, exist_ok=True)
+                if path.is_file() and not force:
+                    raise CondaError(f"Output file already exists ({path}).")
+                path.write_text(json.dumps(patched, indent=2))
+        else:
+            output.parent.mkdir(parents=True, exist_ok=True)
+            output.write_text(json.dumps(repodatas[0][-1], indent=2))
+
+    elif len(repodatas) > 1:
         raise CondaError(
             "Too many channels/subdirs specified to dump to stdout. "
             "Be more selective with your channel/subdir selection."
