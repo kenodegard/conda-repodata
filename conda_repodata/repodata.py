@@ -37,7 +37,7 @@ REPODATA_KEYS = {"info", "packages", "packages.conda", "removed", "repodata_vers
 @click.version_option(__version__)
 @click.help_option("--help", "-h")
 @click.option("--channels", "--channel", "-c", multiple=True)
-@click.option("--subdirs", "--subdir", multiple=True)
+@click.option("--subdirs", "--subdir", "--platforms", "--platform", multiple=True)
 @click.option(
     "--stats",
     is_flag=True,
