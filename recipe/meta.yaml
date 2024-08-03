@@ -8,18 +8,18 @@ source:
 
 build:
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
+  noarch: python
 
 requirements:
   build:
     - git  # for source/git_url above
   host:
-    - python
+    - python >=3.8
     - pip
     - hatchling >=1.12.2
     - hatch-vcs >=0.2.0
-    - wheel
   run:
-    - python
+    - python >=3.8
     - rich
     - click
     - conda
