@@ -3,13 +3,14 @@
 Ever wanted to modify the `repodata.json` (or even just look at it) before downloading the packages? This is the tool for you!
 
 Conda-repodata adds the ability to apply transformations to any `repodata.json` file before downloading the packages. This is useful for things like:
-    - debugging `repodata.json` issues
-    - testing hotfix patches to `repodata.json`
-    - any other `repodata.json` manipulation you can think of!
+
+* debugging `repodata.json` issues
+* testing hotfix patches to `repodata.json`
+* any other `repodata.json` manipulation you can think of!
 
 ## Installation
 
-> **Warning**
+> [!WARNING]
 > This relies on an unreleased version of conda.
 
 ```bash
