@@ -133,9 +133,9 @@ def _pretty(value: Any, cutoff: int = 5):
 def apply_transformations(channel: Channel, repodata: dict) -> dict:
     """Apply repodata transformations."""
     for transformation in filter(
-        None, os.environ.get("CONDA_TRANSFORMATIONS", "").split(",")
+        None,
+        os.environ.get("CONDA_TRANSFORMATIONS", "").split(","),
     ):
-        # each transformer needs to be an import path to the transformation function
         try:
             if Path(transformation).is_file():
                 # full path to a script, the script must define a function called transformer
@@ -148,8 +148,8 @@ def apply_transformations(channel: Channel, repodata: dict) -> dict:
                 function_name = "transformation"
             else:
                 # support a full import path and entrypoint syntax:
-                # pkg.module:function
                 # pkg.module.function
+                # pkg.module:function
                 import_path, function_name = transformation.rsplit(
                     ":" if ":" in transformation else ".", 1
                 )
