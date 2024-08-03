@@ -47,7 +47,7 @@ local_scheme = "dirty-tag"
 include = ["conda_repodata"]
 
 [tool.hatch.build.hooks.vcs]
-version-file = "conda_repodata/__version__.py"
+version-file = "conda_repodata/_version.py"
 
 [tool.black]
 target-version = ['py38', 'py39', 'py310', 'py311']

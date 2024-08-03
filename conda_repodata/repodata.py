@@ -1,6 +1,6 @@
 # Copyright (C) 2023 Ken Odegard
 # SPDX-License-Identifier: BSD-3-Clause
-"""Implements conda repodata subcommand and POC repodata patching."""
+"""Conda repodata subcommand and repodata patching."""
 import json
 import os.path
 from importlib import import_module
@@ -26,7 +26,7 @@ from rich import print
 from rich.pretty import Pretty
 from rich.table import Table
 
-from .__version__ import __version__
+from . import __version__
 
 SUBCOMMAND = "repodata"
 PROG_NAME = f"conda {SUBCOMMAND}"

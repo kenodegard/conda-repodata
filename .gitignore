@@ -1,3 +1,7 @@
+# setuptools-scm
+conda_repodata/_version.py
+
+
 # Created by https://www.toptal.com/developers/gitignore/api/python
 # Edit at https://www.toptal.com/developers/gitignore?templates=python
 
