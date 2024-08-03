@@ -1,9 +1,15 @@
 # Copyright (C) 2023 Ken Odegard
 # SPDX-License-Identifier: BSD-3-Clause
 """A sample transformation that only keeps zlib packages."""
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from conda.models.channel import Channel
 
 
-def transformation(repodata: dict) -> dict:
+def transformation(channel: Channel, repodata: dict) -> dict:
     """Only keep zlib packages."""
     for key in ["packages", "packages.conda"]:
         repodata[key] = {

@@ -130,7 +130,7 @@ def _pretty(value: Any, cutoff: int = 5):
     return Pretty(value)
 
 
-def apply_transformations(repodata: dict) -> dict:
+def apply_transformations(channel: Channel, repodata: dict) -> dict:
     """Apply repodata transformations."""
     for transformation in filter(
         None, os.environ.get("CONDA_TRANSFORMATIONS", "").split(",")
@@ -163,7 +163,7 @@ def apply_transformations(repodata: dict) -> dict:
         function = getattr(module, function_name)
 
         try:
-            repodata = function(repodata)
+            repodata = function(channel, repodata)
         except BaseException as err:
             raise CondaError(
                 f"Failed to apply transformation ({transformation})\nreason: {err!r}"
